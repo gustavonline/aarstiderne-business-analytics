@@ -1,0 +1,100 @@
+table Kunder
+	lineageTag: 30da3365-3054-448a-b7de-5b1c71783041
+
+	column Kundenummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 883cd880-82fd-4a48-af96-50fc0e9c1732
+		summarizeBy: none
+		sourceColumn: Kundenummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column postnr
+		dataType: int64
+		formatString: 0
+		lineageTag: 95c19b8d-f070-4fc8-b6da-fdec3d8c89ed
+		summarizeBy: none
+		sourceColumn: postnr
+
+		annotation SummarizationSetBy = Automatic
+
+	column oprettet_tmsp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d95db109-c774-453d-b529-6f4c8926c4b7
+		summarizeBy: none
+		sourceColumn: oprettet_tmsp
+
+		variation Variation
+			isDefault
+			relationship: 3d5aabdf-7e80-4e6f-bdb6-814de03dfa69
+			defaultHierarchy: LocalDateTable_221cf615-e15e-4a4a-ba3b-3fc4179d2ad2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column første_levering
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 77370e7a-8999-4c09-ae65-04781296cfa0
+		summarizeBy: none
+		sourceColumn: første_levering
+
+		variation Variation
+			isDefault
+			relationship: a7fdb605-0f56-47da-b314-a3e39ef0cf8c
+			defaultHierarchy: LocalDateTable_33f5b1ea-cc8f-43b1-992c-433670b196f9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column husstandsstørrelse
+		dataType: int64
+		formatString: 0
+		lineageTag: b898f268-ab1b-4ab0-bedd-2bc66775468a
+		summarizeBy: sum
+		sourceColumn: husstandsstørrelse
+
+		annotation SummarizationSetBy = Automatic
+
+	column maddage
+		dataType: int64
+		formatString: 0
+		lineageTag: 15148910-6c7e-4c44-bad4-dab274e5e226
+		summarizeBy: sum
+		sourceColumn: maddage
+
+		annotation SummarizationSetBy = Automatic
+
+	column kuverter
+		dataType: int64
+		formatString: 0
+		lineageTag: 524f47f0-6867-4d05-8af0-128c8581b19f
+		summarizeBy: sum
+		sourceColumn: kuverter
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 65409f2f-72f8-4280-838c-4e373507f368
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Kunder = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\gusta\Downloads\Kunder.csv"),[Delimiter=";", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Kundenummer", Int64.Type}, {"postnr", Int64.Type}, {"oprettet_tmsp", type datetime}, {"første_levering", type date}, {"husstandsstørrelse", Int64.Type}, {"maddage", Int64.Type}, {"kuverter", Int64.Type}, {"status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Aarstiderne-business-analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "aac0e7e3-0b7a-496a-88b7-a08c8b63bd6e"
+  }
+}

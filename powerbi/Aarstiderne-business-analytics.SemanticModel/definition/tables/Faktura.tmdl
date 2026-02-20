@@ -1,0 +1,95 @@
+table Faktura
+	lineageTag: daf7a8d0-b0fb-47d2-a0c4-5c9b52c8693a
+
+	column Fakturanummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 19eabed1-e503-42b4-9d67-3194a2038cb5
+		summarizeBy: sum
+		sourceColumn: Fakturanummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column (FK)Ordrenummer
+		dataType: int64
+		formatString: 0
+		lineageTag: bab6487a-b968-4081-ae4c-5eccc77daeec
+		summarizeBy: none
+		sourceColumn: (FK)Ordrenummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column dato
+		dataType: string
+		lineageTag: 1b5601c2-3dd2-41fa-b342-8b002a984f33
+		summarizeBy: none
+		sourceColumn: dato
+
+		annotation SummarizationSetBy = Automatic
+
+	column (FK)kundenr
+		dataType: int64
+		formatString: 0
+		lineageTag: 242401be-a54b-4951-91bf-688f69b0b1d8
+		summarizeBy: sum
+		sourceColumn: (FK)kundenr
+
+		annotation SummarizationSetBy = Automatic
+
+	column (FK)produktnr
+		dataType: string
+		lineageTag: 9c6b8d49-1bfb-460d-bdd1-32ba8186a103
+		summarizeBy: none
+		sourceColumn: (FK)produktnr
+
+		annotation SummarizationSetBy = Automatic
+
+	column vejl_pris
+		dataType: int64
+		formatString: 0
+		lineageTag: 20c90cad-b58e-4fdf-bf5f-621e9ae882d9
+		summarizeBy: sum
+		sourceColumn: vejl_pris
+
+		annotation SummarizationSetBy = Automatic
+
+	column rabatkode
+		dataType: string
+		lineageTag: 5e928075-4bb4-41aa-8bb2-535b80775c45
+		summarizeBy: none
+		sourceColumn: rabatkode
+
+		annotation SummarizationSetBy = Automatic
+
+	column rabatsats
+		dataType: int64
+		formatString: 0
+		lineageTag: d4dd5d7c-e299-40b4-b56b-1267c7a64bf1
+		summarizeBy: sum
+		sourceColumn: rabatsats
+
+		annotation SummarizationSetBy = Automatic
+
+	column fakturapris
+		dataType: int64
+		formatString: 0
+		lineageTag: c7be073c-51bb-454a-b2b6-b9ad575dc2e6
+		summarizeBy: sum
+		sourceColumn: fakturapris
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Faktura = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\gusta\Downloads\faktura.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Fakturanummer", Int64.Type}, {"(FK)Ordrenummer", Int64.Type}, {"dato", type text}, {"(FK)kundenr", Int64.Type}, {"(FK)produktnr", type text}, {"vejl_pris", Int64.Type}, {"rabatkode", type text}, {"rabatsats", Int64.Type}, {"fakturapris", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

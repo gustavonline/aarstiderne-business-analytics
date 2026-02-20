@@ -1,0 +1,51 @@
+table Geografi
+	lineageTag: 3be5e18e-20fe-4f8c-9742-803d1ec71e18
+
+	column Postnummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 045c758b-28ec-4873-b775-250bda6d31b7
+		summarizeBy: none
+		sourceColumn: Postnummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 662f2641-e21c-4c8b-888c-ad142652e737
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column landsdel
+		dataType: string
+		lineageTag: 7537033a-7e51-4ba2-acff-26412ebf206d
+		summarizeBy: none
+		sourceColumn: landsdel
+
+		annotation SummarizationSetBy = Automatic
+
+	column indbyggere
+		dataType: int64
+		formatString: 0
+		lineageTag: d2bf18cd-9542-47d3-896d-d903c37ad3e7
+		summarizeBy: none
+		sourceColumn: indbyggere
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Geografi = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\gusta\Downloads\Geografi.csv"),[Delimiter=";", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Postnummer", Int64.Type}, {"region", type text}, {"landsdel", type text}, {"indbyggere", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

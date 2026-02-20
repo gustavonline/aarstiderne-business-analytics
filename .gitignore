@@ -1,7 +1,11 @@
-# Power BI artifacts
+# Power BI binaries (keep source-control friendly)
 *.pbix
 *.pbit
-*.pbip
+
+# PBIP local/cache artifacts
+**/.pbi/
+**/cache.abf
+**/localSettings.json
 
 # Local data files (keep repo light)
 data/*.csv

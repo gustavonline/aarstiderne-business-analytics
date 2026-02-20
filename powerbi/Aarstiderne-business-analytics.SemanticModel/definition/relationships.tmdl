@@ -1,0 +1,54 @@
+relationship 3d5aabdf-7e80-4e6f-bdb6-814de03dfa69
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Kunder.oprettet_tmsp
+	toColumn: LocalDateTable_221cf615-e15e-4a4a-ba3b-3fc4179d2ad2.Date
+
+relationship a7fdb605-0f56-47da-b314-a3e39ef0cf8c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Kunder.første_levering
+	toColumn: LocalDateTable_33f5b1ea-cc8f-43b1-992c-433670b196f9.Date
+
+relationship f3dcff3f-628e-4e75-9abb-81e5d245b8ad
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Hændelseslog.timestamp
+	toColumn: LocalDateTable_ab22eb2e-a619-4bbc-9cc5-d0c973c4e843.Date
+
+relationship 46256256-cb7a-4e33-b5e8-11462aad18b4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Hændelseslog.leveringsdato
+	toColumn: LocalDateTable_87dc4bc2-913a-4904-ba84-bfa2cc48bd41.Date
+
+relationship 4ff9232f-ea5d-4832-8da0-6d386b652041
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Ordrer.dato
+	toColumn: LocalDateTable_c1cab2a1-c7c3-4a52-8108-53664796daec.Date
+
+relationship 4ce0c2de-d19c-4f55-a108-81b4d8ab7f84
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Ordrer.leveringstidspunkt
+	toColumn: LocalDateTable_2e4f236d-ae17-4e55-bcb7-70f067561746.Date
+
+relationship AutoDetected_7812cf0f-d2e5-4910-8fd5-624ed019b0ff
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Ordrer.Ordrenummer
+	toColumn: Faktura.(FK)Ordrenummer
+
+relationship 087a4021-90d1-a0c5-8ea8-0eec1e8b66c0
+	crossFilteringBehavior: bothDirections
+	fromColumn: Ordrer.kundenr
+	toColumn: Kunder.Kundenummer
+
+relationship 9e95be42-b014-ebbc-9381-3d6b6fcc34b7
+	crossFilteringBehavior: bothDirections
+	fromColumn: Ordrer.produktnr
+	toColumn: Produkter.Produkternummer
+
+relationship 098f3ca6-74e8-4c74-ced6-b5df4aa10809
+	fromColumn: Hændelseslog.kundenr
+	toColumn: Kunder.Kundenummer
+
+relationship 7ad982e5-9ded-7286-8eba-5f40604ebf4f
+	fromColumn: Kunder.postnr
+	toColumn: Geografi.Postnummer
+

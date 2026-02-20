@@ -1,0 +1,17 @@
+table '* Global Measures *'
+	lineageTag: edb09cf4-7c2c-4545-bafc-2fafdced0bd4
+
+	column *Measures
+		lineageTag: d634d5f8-15ad-4896-9988-a7f3ce87cb81
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [*Measures]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '* Global Measures *' = calculated
+		mode: import
+		source = ROW("*Measures","")
+
+	annotation PBI_Id = 445ed1c641a94440a5b27870c9d3de82
+

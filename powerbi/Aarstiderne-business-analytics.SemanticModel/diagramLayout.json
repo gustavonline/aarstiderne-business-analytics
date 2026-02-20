@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 65,
+            "y": 0
+          },
+          "nodeIndex": "Faktura",
+          "nodeLineageTag": "daf7a8d0-b0fb-47d2-a0c4-5c9b52c8693a",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 725,
+            "y": 431
+          },
+          "nodeIndex": "Geografi",
+          "nodeLineageTag": "3be5e18e-20fe-4f8c-9742-803d1ec71e18",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 382,
+            "y": 2
+          },
+          "nodeIndex": "Kunder",
+          "nodeLineageTag": "30da3365-3054-448a-b7de-5b1c71783041",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 421,
+            "y": 464
+          },
+          "nodeIndex": "Produkter",
+          "nodeLineageTag": "0d7b1076-7a75-4da7-9f11-a0609afc43c6",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 730,
+            "y": 0
+          },
+          "nodeIndex": "Hændelseslog",
+          "nodeLineageTag": "54fee32e-3175-4516-825e-67272cf34ec1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 57.666660308837891,
+            "y": 376.5
+          },
+          "nodeIndex": "Ordrer",
+          "nodeLineageTag": "66490929-9b1c-49e3-adce-98ef86fdfc8a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1020.3333396911621,
+            "y": 0
+          },
+          "nodeIndex": "* Global Measures *",
+          "nodeLineageTag": "edb09cf4-7c2c-4545-bafc-2fafdced0bd4",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

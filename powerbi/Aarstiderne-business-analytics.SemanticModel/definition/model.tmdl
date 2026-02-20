@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-DK
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Produkter","Kunder","Geografi","Faktura","Hændelseslog","Ordrer"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Produkter
+ref table Kunder
+ref table DateTableTemplate_f08183d1-8e1b-4985-bee4-4d7b9938380f
+ref table LocalDateTable_221cf615-e15e-4a4a-ba3b-3fc4179d2ad2
+ref table LocalDateTable_33f5b1ea-cc8f-43b1-992c-433670b196f9
+ref table Geografi
+ref table Faktura
+ref table Hændelseslog
+ref table LocalDateTable_ab22eb2e-a619-4bbc-9cc5-d0c973c4e843
+ref table LocalDateTable_87dc4bc2-913a-4904-ba84-bfa2cc48bd41
+ref table Ordrer
+ref table LocalDateTable_c1cab2a1-c7c3-4a52-8108-53664796daec
+ref table LocalDateTable_2e4f236d-ae17-4e55-bcb7-70f067561746
+ref table '* Global Measures *'
+
+ref cultureInfo en-US
+

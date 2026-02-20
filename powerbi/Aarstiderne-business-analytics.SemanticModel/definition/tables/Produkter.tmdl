@@ -1,0 +1,34 @@
+table Produkter
+	lineageTag: 0d7b1076-7a75-4da7-9f11-a0609afc43c6
+
+	column Produkternummer
+		dataType: string
+		lineageTag: 75ff660c-b0b1-4415-8324-e08a16c7ac3a
+		summarizeBy: none
+		sourceColumn: Produkternummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column produktnavn
+		dataType: string
+		lineageTag: c688a698-3c39-46d0-86cd-7286de4f9be7
+		summarizeBy: none
+		sourceColumn: produktnavn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Produkter = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\gusta\Downloads\Produkter.csv"),[Delimiter=";", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Produkternummer", type text}, {"produktnavn", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

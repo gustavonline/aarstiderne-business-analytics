@@ -1,0 +1,120 @@
+table Hændelseslog
+	lineageTag: 54fee32e-3175-4516-825e-67272cf34ec1
+
+	column Lbnr
+		dataType: int64
+		formatString: 0
+		lineageTag: c1163157-bab7-4cb9-8f6f-05ded31ae1b1
+		summarizeBy: sum
+		sourceColumn: Lbnr
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 35fadc6e-dbd5-4496-8751-7b8898a880a7
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		variation Variation
+			isDefault
+			relationship: f3dcff3f-628e-4e75-9abb-81e5d245b8ad
+			defaultHierarchy: LocalDateTable_ab22eb2e-a619-4bbc-9cc5-d0c973c4e843.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column leveringsdato
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fe7ee59d-4a80-4c9e-9c64-9aeb2975eb73
+		summarizeBy: none
+		sourceColumn: leveringsdato
+
+		variation Variation
+			isDefault
+			relationship: 46256256-cb7a-4e33-b5e8-11462aad18b4
+			defaultHierarchy: LocalDateTable_87dc4bc2-913a-4904-ba84-bfa2cc48bd41.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column kundenr
+		dataType: int64
+		formatString: 0
+		lineageTag: fc913247-4c77-4183-9dd6-171aa7e01e06
+		summarizeBy: none
+		sourceColumn: kundenr
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordrenr
+		dataType: int64
+		formatString: 0
+		lineageTag: e6db0256-9efd-4359-a6d5-701abc54b2ee
+		summarizeBy: sum
+		sourceColumn: ordrenr
+
+		annotation SummarizationSetBy = Automatic
+
+	column kategori
+		dataType: string
+		lineageTag: a9d3b1e0-c8bc-4389-81f0-3e974e8169ad
+		summarizeBy: none
+		sourceColumn: kategori
+
+		annotation SummarizationSetBy = Automatic
+
+	column hændelse
+		dataType: string
+		lineageTag: f54e2023-69ae-4620-8bb2-fb8c4b6ed0f1
+		summarizeBy: none
+		sourceColumn: hændelse
+
+		annotation SummarizationSetBy = Automatic
+
+	column beskrivelse
+		dataType: string
+		lineageTag: bae7aa78-95ac-42b2-aa24-b06726c22f98
+		summarizeBy: none
+		sourceColumn: beskrivelse
+
+		annotation SummarizationSetBy = Automatic
+
+	column ændring_fra
+		dataType: string
+		lineageTag: 0f15bb10-8cda-4f15-996b-2c86def5f7d1
+		summarizeBy: none
+		sourceColumn: ændring_fra
+
+		annotation SummarizationSetBy = Automatic
+
+	column ændring_til
+		dataType: string
+		lineageTag: 77c4a3c4-0922-4661-a9a9-c01bd2e33c6a
+		summarizeBy: none
+		sourceColumn: ændring_til
+
+		annotation SummarizationSetBy = Automatic
+
+	column kundeindgang
+		dataType: string
+		lineageTag: e95803b0-332d-466d-bae2-c432f5e1c585
+		summarizeBy: none
+		sourceColumn: kundeindgang
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Hændelseslog = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\gusta\Downloads\Hændelseslog.csv"),[Delimiter=";", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Lbnr", Int64.Type}, {"timestamp", type datetime}, {"leveringsdato", type date}, {"kundenr", Int64.Type}, {"ordrenr", Int64.Type}, {"kategori", type text}, {"hændelse", type text}, {"beskrivelse", type text}, {"ændring_fra", type text}, {"ændring_til", type text}, {"kundeindgang", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

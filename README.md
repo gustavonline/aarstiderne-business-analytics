@@ -1,13 +1,30 @@
 # Aarstiderne Business Analytics (Power BI)
 
-Dette repo er sat op til at hjælpe med datamodellering og visualisering i Power BI for følgende filer:
+Repo til fælles arbejde på Aarstiderne-analysen i Power BI.
 
-- `Geografi.csv`
-- `Hændelseslog.csv`
-- `Ordrer.csv`
-- `Produkter.csv`
-- `faktura.csv`
-- (valgfri) `Kunder.csv` til kundedimension
+## Projektfiler (Power BI)
+
+Power BI projektet ligger her:
+
+- `powerbi/Aarstiderne-business-analytics.pbip`
+
+Tilhørende artifacts:
+- `powerbi/Aarstiderne-business-analytics.Report/`
+- `powerbi/Aarstiderne-business-analytics.SemanticModel/`
+
+## Hurtig start
+
+1. Klon repo
+2. Sæt lokal data-path med script
+3. Åbn `.pbip`
+
+Se guide:
+- [`docs/powerbi-setup.md`](docs/powerbi-setup.md)
+
+## Samarbejde (branches + async workflow)
+
+Se branch-strategi og PR-flow:
+- [`docs/samarbejde-git-workflow.md`](docs/samarbejde-git-workflow.md)
 
 ## Hurtige dataindsigter
 
@@ -19,52 +36,27 @@ Dette repo er sat op til at hjælpe med datamodellering og visualisering i Power
 - **Omsætning (fakturapris):** 121.826.938
 - **Samlet rabat:** 1.197.756 (~0,97% af vejl. pris)
 
-## Anbefalet model (kort)
+## Datamodel og visualiseringer
 
-Byg en stjernemodel med 2 fakta-tabeller:
+- Datamodel: [`docs/powerbi-datamodel.md`](docs/powerbi-datamodel.md)
+- Visualiseringer: [`docs/visualiseringer.md`](docs/visualiseringer.md)
+- DAX-forslag: [`docs/dax-measures.md`](docs/dax-measures.md)
+- Profiling summary: [`docs/profiling-summary.md`](docs/profiling-summary.md)
 
-- `FactSalg` = merge af `Ordrer` + `faktura` på ordrenummer
-- `FactHændelse` = `Hændelseslog`
+## Scripts
 
-Dimensioner:
+- `scripts/validate_data_model.py` – valider relationer/datoer
+- `scripts/set_powerbi_data_paths.py` – sæt datakilde-paths for teamet
 
-- `DimKunde` (`Kunder.csv`)
-- `DimProdukt` (`Produkter.csv`)
-- `DimDato` (kalendertabel)
-- `DimGeografi` (`Geografi.csv`)
-
-Detaljer: se [`docs/powerbi-datamodel.md`](docs/powerbi-datamodel.md)
-
-## Foreslåede rapport-sider
-
-1. **Executive overview** (KPI’er + trends)
-2. **Produktperformance** (mix, omsætning, kuverter/maddage)
-3. **Geografi** (kort + region/landsdel)
-4. **Kunde- og abonnementsadfærd** (pause/genoptag/opsigelse)
-5. **Kampagne og rabat-effekt**
-
-Detaljer: se [`docs/visualiseringer.md`](docs/visualiseringer.md)
-
-## DAX-målinger
-
-Forslag til centrale measures ligger i:
-
-- [`docs/dax-measures.md`](docs/dax-measures.md)
-
-## Datavalidering
-
-Script til at validere nøgler og relationer:
-
-- `scripts/validate_data_model.py`
-
-Kør:
+Eksempel:
 
 ```bash
+python scripts/set_powerbi_data_paths.py --data-dir "C:\Users\<dig>\Downloads"
 python scripts/validate_data_model.py
 ```
 
-## Bemærk om datafiler
+## Datafiler
 
-Repoet holder sig letvægts. Læg CSV-filerne i en lokal `data/` mappe eller peg Power BI direkte mod dine eksisterende filer.
+CSV-filer er ikke committet. Læg dem lokalt og peg modellen mod din mappe.
 
 Se: `data/README.md`

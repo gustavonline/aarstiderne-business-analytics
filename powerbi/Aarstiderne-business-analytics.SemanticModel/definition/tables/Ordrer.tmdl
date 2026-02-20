@@ -1,0 +1,115 @@
+table Ordrer
+	lineageTag: 66490929-9b1c-49e3-adce-98ef86fdfc8a
+
+	column Ordrenummer
+		dataType: int64
+		formatString: 0
+		lineageTag: 919eb7a4-b9dd-48fe-a28f-957d4727392f
+		summarizeBy: none
+		sourceColumn: Ordrenummer
+
+		annotation SummarizationSetBy = Automatic
+
+	column kundenr
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a1951ef-64b2-412a-a808-58529a43e9d4
+		summarizeBy: none
+		sourceColumn: kundenr
+
+		annotation SummarizationSetBy = Automatic
+
+	column postnr_kunde
+		dataType: int64
+		formatString: 0
+		lineageTag: 75885dfb-7ae9-48aa-b745-40c806cd73ff
+		summarizeBy: sum
+		sourceColumn: postnr_kunde
+
+		annotation SummarizationSetBy = Automatic
+
+	column rute
+		dataType: int64
+		formatString: 0
+		lineageTag: 05207623-2fca-4a77-a3bc-7295d4e75dfd
+		summarizeBy: sum
+		sourceColumn: rute
+
+		annotation SummarizationSetBy = Automatic
+
+	column dato
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 48aa131d-e46e-47e0-923b-d9bc658f38a4
+		summarizeBy: none
+		sourceColumn: dato
+
+		variation Variation
+			isDefault
+			relationship: 4ff9232f-ea5d-4832-8da0-6d386b652041
+			defaultHierarchy: LocalDateTable_c1cab2a1-c7c3-4a52-8108-53664796daec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column produktnr
+		dataType: string
+		lineageTag: d2b3a601-ccb2-4ac0-a354-77b975f0c6e4
+		summarizeBy: none
+		sourceColumn: produktnr
+
+		annotation SummarizationSetBy = Automatic
+
+	column maddage
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c3df6e3-1acf-4654-b41a-10a3ddcdbeb7
+		summarizeBy: sum
+		sourceColumn: maddage
+
+		annotation SummarizationSetBy = Automatic
+
+	column kuverter
+		dataType: int64
+		formatString: 0
+		lineageTag: 991e5dc6-7572-4378-a305-b1b09f984c17
+		summarizeBy: sum
+		sourceColumn: kuverter
+
+		annotation SummarizationSetBy = Automatic
+
+	column kampagne
+		dataType: string
+		lineageTag: 7a2f9123-70c6-44c3-988b-f5e5dcd9abc5
+		summarizeBy: none
+		sourceColumn: kampagne
+
+		annotation SummarizationSetBy = Automatic
+
+	column leveringstidspunkt
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5b7c2864-3757-4022-8565-b8bc24d61434
+		summarizeBy: none
+		sourceColumn: leveringstidspunkt
+
+		variation Variation
+			isDefault
+			relationship: 4ce0c2de-d19c-4f55-a108-81b4d8ab7f84
+			defaultHierarchy: LocalDateTable_2e4f236d-ae17-4e55-bcb7-70f067561746.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Ordrer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\gusta\Downloads\Ordrer.csv"),[Delimiter=";", Columns=10, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Ordrenummer", Int64.Type}, {"kundenr", Int64.Type}, {"postnr_kunde", Int64.Type}, {"rute", Int64.Type}, {"dato", type date}, {"produktnr", type text}, {"maddage", Int64.Type}, {"kuverter", Int64.Type}, {"kampagne", type text}, {"leveringstidspunkt", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

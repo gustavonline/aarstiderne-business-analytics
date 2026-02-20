@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "753528ef7ffd11570928",
+  "position": {
+    "x": 99.650909502390448,
+    "y": 99.650909502390448,
+    "z": 1,
+    "height": 336.03213669410729,
+    "width": 438.00050920818126,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Geografi"
+                    }
+                  },
+                  "Property": "Postnummer"
+                }
+              },
+              "queryRef": "Geografi.Postnummer",
+              "nativeQueryRef": "Postnummer",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": []
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2c062758f1369d20c8c2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Geografi"
+              }
+            },
+            "Property": "Postnummer"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
