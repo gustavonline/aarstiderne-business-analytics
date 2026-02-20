@@ -1,0 +1,11 @@
+# Power BI artifacts
+*.pbix
+*.pbit
+*.pbip
+
+# Local data files (keep repo light)
+data/*.csv
+
+# Python
+__pycache__/
+*.pyc
